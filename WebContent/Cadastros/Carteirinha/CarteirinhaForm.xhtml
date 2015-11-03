@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title></title>
+	<link rel="stylesheet" type="text/css"
+		href="/VendaJSF/resources/css/Estilos.css" />
+	<script type="text/javascript"
+		src="/VendaJSF/resources/jquery-ui-1.11.4/jquery-ui.js"></script>
+	<script type="text/javascript"
+		src="/VendaJSF/resources/jquery-dialogextend-
+master/build/jquery.dialogextend.js"></script>
+	<script type="text/javascript"
+		src="/VendaJSF/resources/js/Funcoes.js"></script>
+</h:head>
+<h:body>
+
+	<h:form id="formEditar">
+		<p:focus for="id_carteirinha" />
+		<p:growl></p:growl>
+		<p:panelGrid columns="2">
+			<f:facet name="header">
+				<p:outputLabel value="Cadastro de Carteirinhas" />
+			</f:facet>
+
+			<p:outputLabel value="Código:" for="id_carteirinha" />
+			<p:inputText id="id_carteirinha" readonly="true" size="5"
+				value="#{carteirinha.objeto.id_carteirinha}" />
+
+			<p:outputLabel value="Ano:" for="ano" />
+			<p:inputText id="ano" size="50" value="#{carteirinha.objeto.ano}" />
+
+			<p:outputLabel value="Data de Validade:" for="data_validade" />
+			<p:calendar id="data_validade" size="50"
+				value="#{carteirinha.objeto.data_validade}" />
+
+			<p:commandLink value="Cursos"
+				onclick="parent.abrePopUp('VendaJSF/faces/Cadastros/Cursos/CursosList.xhtml', 'Cadastro de Cursos', 500, 800, true)" />
+			<p:autoComplete id="cursos" style="width:600px" dropdown="true"
+				multiple="false" forceSelection="true" var="obj"
+				itemLabel="#{obj.descricao}" itemValue="#{obj}"
+				value="#{carteirinha.objeto.cursos}" converter="cursosConverter"
+				completeMethod="#{carteirinha.completeCurso}" />
+
+			<p:commandLink value="Escola"
+				onclick="parent.abrePopUp('VendaJSF/faces/Cadastros/Escola/EscolaList.xhtml', 'Cadastro de Escolas', 500, 800, true)" />
+			<p:autoComplete id="escola" style="width:600px" dropdown="true"
+				multiple="false" forceSelection="true" var="obj"
+				itemLabel="#{obj.nome}" itemValue="#{obj}"
+				value="#{carteirinha.objeto.escola}" converter="escolaConverter"
+				completeMethod="#{carteirinha.completeEscola}" />
+
+			<p:commandLink value="Aluno"
+				onclick="parent.abrePopUp('VendaJSF/faces/Cadastros/Cliente/ClienteForm.xhtml', 'Cadastro de Clientes', 500, 800, true)" />
+			<p:autoComplete id="cliente" style="width:600px" dropdown="true"
+				multiple="false" forceSelection="true" var="obj"
+				itemLabel="#{obj.nome}" itemValue="#{obj}"
+				value="#{carteirinha.objeto.cliente}" converter="pessoaFisicaConverter"
+				completeMethod="#{carteirinha.completeAluno}" />
+
+
+			<f:facet name="footer">
+				<p:commandButton value="Gravar" action="#{carteirinha.gravar}"
+					ajax="false" />
+				<p:commandButton value="Cancelar" action="#{carteirinha.cancelar}"
+					ajax="false" immediate="true" />
+			</f:facet>
+		</p:panelGrid>
+	</h:form>
+
+
+
+
+</h:body>
+</html>

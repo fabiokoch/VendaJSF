@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title></title>
+</h:head>
+<h:body>
+	
+<h:form id="formEditar">
+	<p:focus for="id_escola"/>
+	<p:growl></p:growl>
+	<p:panelGrid columns="2">
+		<f:facet name="header">
+			<p:outputLabel value="Cadastro de Escolas" />
+		</f:facet>
+		
+		<p:outputLabel value="Código:" for="id_escola" />
+		<p:inputText id="id_escola" readonly="true" size="5" value="#{escola.objeto.id_escola}" />
+			
+		<p:outputLabel value="Nome:" for="nome" />
+		<p:inputText id="nome" size="50" value="#{escola.objeto.nome}"/>
+		
+		<f:facet name="footer">
+			<p:commandButton value="Gravar" action="#{escola.gravar}" ajax="false" />
+			<p:commandButton value="Cancelar" action="#{escola.cancelar}" ajax="false" immediate="true"/>
+		</f:facet>
+	</p:panelGrid>
+</h:form>
+	
+	
+	
+
+</h:body>
+</html>

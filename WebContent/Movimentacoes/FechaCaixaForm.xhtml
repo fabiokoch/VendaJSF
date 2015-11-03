@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title></title>
+</h:head>
+<h:body>
+	
+<h:form id="formEditar">
+	<p:focus for="data_fechamento"/>
+	<p:growl></p:growl>
+	<p:panelGrid columns="2">
+		<f:facet name="header">
+			<p:outputLabel value="Fechamento de Caixa" />
+		</f:facet>
+			
+		<p:outputLabel value="Data de Fechamento:" for="data_fechamento" />
+		<p:calendar id="data_fechamento" size="50" value="#{caixas.objeto.data_fechamento}"/> 
+		
+		<p:outputLabel value="Caixa Final:" for="caixa_final" />
+		<p:inputText id="caixa_final" size="50" value="#{caixas.objeto.caixa_final}"/>
+		
+		<p:commandLink value="Usuário" onclick="parent.abrePopUp('../../Cadastros/Usuario/UsuarioForm.xhtml', 'Cadastro de Usuarios', 500, 800, true)" />
+		<p:autoComplete id="usuario" style="width:600px"
+                dropdown="true" multiple="false" forceSelection="true"
+                var="obj" itemLabel="#{obj.nome}" itemValue="#{obj}"  	     
+                value="#{caixas.objeto.usuario}" 
+                converter="usuarioConverter"
+                completeMethod="#{caixas.completeUsuario}" />
+
+		<f:facet name="footer">
+			<p:commandButton value="Gravar" action="#{caixas.gravar}" ajax="false" />
+			<p:commandButton value="Cancelar" action="#{caixas.cancelar}" ajax="false" immediate="true"/>
+		</f:facet>
+	</p:panelGrid>
+</h:form>
+	
+	
+	
+
+</h:body>
+</html>

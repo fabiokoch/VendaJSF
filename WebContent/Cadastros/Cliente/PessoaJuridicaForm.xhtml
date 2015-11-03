@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title></title>
+	
+</h:head>
+<h:body>
+	
+<h:form id="formEditar">
+	<p:focus for="nome"/>
+	<p:growl></p:growl>
+	<p:panelGrid columns="2">
+		<f:facet name="header">
+			<p:outputLabel value="Edição de Pessoa Juridica" />
+		</f:facet>
+		
+		<p:outputLabel value="Código:" for="id" />
+		<p:inputText id="id" readonly="true" size="5" value="#{pessoaJuridicaCrud.objeto.id}" />
+			
+		<p:outputLabel value="Nome:" for="nome" />
+		<p:inputText id="nome" size="50" value="#{pessoaJuridicaCrud.objeto.nome}"/>
+			
+		<p:outputLabel value="Endereço:" for="endereco" />
+		<p:inputText id="endereco" size="50" value="#{pessoaJuridicaCrud.objeto.endereco}"/>
+
+		<p:outputLabel value="Número:" for="numero" />
+		<p:inputText id="numero" size="50" value="#{pessoaJuridicaCrud.objeto.numero}"/>
+		
+		<p:outputLabel value="Complemento:" for="complemento" />
+		<p:inputText id="complemento" size="50" value="#{pessoaJuridicaCrud.objeto.complemento}"/>
+		
+		<p:outputLabel value="Bairro:" for="bairro" />
+		<p:inputText id="bairro" size="50" value="#{pessoaJuridicaCrud.objeto.bairro}"/>
+		
+		<p:outputLabel value="CEP:" for="cep" />
+		<p:inputMask id="cep" size="50" value="#{pessoaJuridicaCrud.objeto.cep}" mask="99999-999"/>
+		
+		<p:outputLabel value="E-mail:" for="email" />
+		<p:inputText id="email" size="50" value="#{pessoaJuridicaCrud.objeto.email}"/>
+		
+		<p:outputLabel value="Telefone:" for="telefone" />
+		<p:inputMask id="telefone" size="50" value="#{pessoaJuridicaCrud.objeto.telefone}" mask="(99) 9999-9999"/>
+		
+		<p:outputLabel value="CNPJ:" for="cnpj" />
+		<p:inputMask id="cnpj" size="50" value="#{pessoaJuridicaCrud.objeto.cnpj}" mask="99.999.999/9999-99"/>
+		
+		<p:outputLabel value="IE:" for="ie" />
+		<p:inputText id="ie" size="50" value="#{pessoaJuridicaCrud.objeto.ie}"/>														
+		
+		<p:outputLabel value="Data Constituição:" for="dataConstituicao" />
+	    <p:calendar id="dataConstituicao" value="#{pessoaJuridicaCrud.objeto.dataConstituicao}" showOn="button"></p:calendar>
+				
+		<p:commandLink value="Cidade" onclick="parent.abrePopUp('../../Cadastros/Cidade/CidadeList.xhtml', 'Cadastro de Cidades', 500, 800, true)" />
+		<p:autoComplete id="cidade" style="width:600px"
+                dropdown="true" multiple="false" forceSelection="true"
+                var="obj" itemLabel="#{obj.nome} / #{obj.uf}" itemValue="#{obj}"  	     
+                value="#{pessoaJuridicaCrud.objeto.cidade}" 
+                converter="cidadeConverter"
+                completeMethod="#{pessoaJuridicaCrud.completeCidade}" /> 
+				
+				
+		<f:facet name="footer">
+			<p:commandButton value="Gravar" action="#{pessoaJuridicaCrud.gravar}" ajax="false" />
+			<p:commandButton value="Cancelar" action="#{pessoaJuridicaCrud.cancelar}" ajax="false" immediate="true"/>
+		</f:facet>
+	</p:panelGrid>
+</h:form>
+	
+	
+	
+
+</h:body>
+</html>

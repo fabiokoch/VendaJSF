@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title></title>
+</h:head>
+<h:body>
+	
+<h:form id="formEditar">
+	<p:focus for="usuario"/>
+	<p:growl></p:growl>
+	<p:panelGrid columns="2">
+		<f:facet name="header">
+			<p:outputLabel value="Venda de Passes" />
+		</f:facet>
+		
+		<p:commandLink value="Usuário" onclick="parent.abrePopUp('../../Cadastros/Usuario/UsuarioForm.xhtml', 'Cadastro de Usuarios', 500, 800, true)" />
+		<p:autoComplete id="usuario" style="width:600px"
+                dropdown="true" multiple="false" forceSelection="true"
+                var="obj" itemLabel="#{obj.nome}" itemValue="#{obj}"  	     
+                value="#{venda.objeto.usuario}" 
+                converter="usuarioConverter"
+                completeMethod="#{venda.completeUsuario}" />
+                
+        <p:commandLink value="Carteirinha" onclick="parent.abrePopUp('../../Cadastros/Carteirinha/CarteirinhaForm.xhtml', 'Cadastro de Carteirinhas', 500, 800, true)" />
+		<p:autoComplete id="carteirinha" style="width:600px"
+                dropdown="true" multiple="false" forceSelection="true"
+                var="obj" itemLabel="#{obj.nome}" itemValue="#{obj}"  	     
+                value="#{venda.objeto.carteirinha}" 
+                converter="carteirinhaConverter"
+                completeMethod="#{venda.completeCarteirinha}" />
+                
+        <p:commandLink value="Cliente" onclick="parent.abrePopUp('../../Cadastros/Cliente/PesoaFisicaForm.xhtml', 'Cadastro de Pessoa Fisica', 500, 800, true)" />
+		<p:autoComplete id="fisica" style="width:600px"
+                dropdown="true" multiple="false" forceSelection="true"
+                var="obj" itemLabel="#{obj.nome}" itemValue="#{obj}"  	     
+                value="#{venda.objeto.cliente}" 
+                converter="pessoaConverter"
+                completeMethod="#{venda.completePessoa}" />
+			
+		
+		
+		<f:facet name="footer">
+			<p:commandButton value="Gravar" action="#" ajax="false" />
+			<p:commandButton value="Cancelar" action="#" ajax="false" immediate="true"/>
+		</f:facet>
+	</p:panelGrid>
+</h:form>
+	
+	
+	
+
+</h:body>
+</html>

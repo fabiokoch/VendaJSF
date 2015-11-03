@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title></title>
+</h:head>
+<h:body>
+	
+<h:form id="formEditar">
+	<p:focus for="id_tipo_passe"/>
+	<p:growl></p:growl>
+	<p:panelGrid columns="2">
+		<f:facet name="header">
+			<p:outputLabel value="Cadastro de Passes" />
+		</f:facet>
+		
+		<p:outputLabel value="Código:" for="id_tipo_passe" />
+		<p:inputText id="id_tipo_passe" readonly="true" size="5" value="#{tipo.objeto.id_tipo_passe}" />
+			
+		<p:outputLabel value="Descricao:" for="descricao" />
+		<p:inputText id="descricao" size="50" value="#{tipo.objeto.descricao}"/>
+		
+		<f:facet name="footer">
+			<p:commandButton value="Gravar" action="#{tipo.gravar}" ajax="false" />
+			<p:commandButton value="Cancelar" action="#{tipo.cancelar}" ajax="false" immediate="true"/>
+		</f:facet>
+	</p:panelGrid>
+</h:form>
+	
+	
+	
+
+</h:body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title></title>
+</h:head>
+<h:body>
+	
+<h:form id="formEditar">
+	<p:focus for="id_valor"/>
+	<p:growl></p:growl>
+	<p:panelGrid columns="2">
+		<f:facet name="header">
+			<p:outputLabel value="Edição de Valores de Passe" />
+		</f:facet>
+		
+		<p:outputLabel value="Código:" for="id_valor" />
+		<p:inputText id="id_valor" readonly="true" size="5" value="#{valor.objeto.id_valor}" />
+			
+		<p:outputLabel value="Data inicio da vigencia:" for="data_inicio_vigencia" />
+		<p:calendar id="data_inicio_vigencia" size="50" value="#{valor.objeto.data_inicio_vigencia}"/>
+		
+		<p:outputLabel value="Data fim da vigencia:" for="data_fim_vigencia" />
+		<p:calendar id="data_fim_vigencia" size="50" value="#{valor.objeto.data_fim_vigencia}"/>	
+		
+		<p:outputLabel value="Valor:" for="valor" />
+		<p:inputText id="valor" size="50" value="#{valor.objeto.valor}"/>	
+		
+		<p:commandLink value="Tipo Passe" onclick="parent.abrePopUp('../../Cadastros/Passe/TipoPasseList.xhtml', 'Cadastro de Passes', 500, 800, true)" />
+		<p:autoComplete id="tipo" style="width:600px"
+                dropdown="true" multiple="false" forceSelection="true"
+                var="obj" itemLabel="#{obj.descricao}" itemValue="#{obj}"  	     
+                value="#{valor.objeto.tipo}" 
+                converter="tipoPasseConverter"
+                completeMethod="#{valor.completeTipo}" />
+		<f:facet name="footer">
+			<p:commandButton value="Gravar" action="#{valor.gravar}" ajax="false" />
+			<p:commandButton value="Cancelar" action="#{valor.cancelar}" ajax="false" immediate="true"/>
+		</f:facet>
+	</p:panelGrid>
+</h:form>
+	
+	
+	
+
+</h:body>
+</html>

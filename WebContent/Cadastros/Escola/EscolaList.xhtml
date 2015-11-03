@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title></title>
+</h:head>
+<h:body onload="#{escola.inicializarLista()}">
+
+	<h:form id="formLista">
+        <p:growl></p:growl>
+		<p:dataTable var="cid" value="#{escola.lista}"
+		    paginator="true" rows="10" rowsPerPageTemplate="5,10,15"
+            paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+            currentPageReportTemplate="Listando de {startRecord} até {endRecord} de {totalRecords}."
+            emptyMessage="Nenhum resultado encontrado"
+		   >
+			<f:facet name="header">
+				<p:spacer height="20"></p:spacer>
+				<div align="left" style="position:absolute; top:20px; width:95%;">
+				   <p:outputLabel value="Listagem de Escolas"></p:outputLabel>
+				</div>
+				<div align="right" style="position:absolute; top:12px; width:95%;">
+					<p:commandButton id="botaoIncluir" value="Incluir" action="#{escola.incluir}" ajax="false"/>
+				</div>
+    		</f:facet>
+			<p:column headerText="Código" 
+				      sortBy="#{cid.id_escola}"
+				      filterBy="#{cid.id_escola}" filterMatchMode="exact">
+				<h:outputText value="#{cid.id_escola}" />
+			</p:column>
+
+			<p:column headerText="Nome"
+			          sortBy="#{cid.nome}"
+			          filterBy="#{cid.nome}" filterMatchMode="contains">
+				<h:outputText value="#{cid.nome}" />
+			</p:column>
+
+            <p:column headerText="" width="60">
+                 <p:commandButton action="#{escola.alterar(cid.id_escola)}" value="Alterar" ajax="false"/>
+            </p:column>
+            
+            <p:column headerText="" width="60">
+                 <p:commandButton action="#{escola.excluir(cid.id_escola)}" value="Excluir" ajax="false"
+                                onclick="if (!confirm('Confirma a exclusão?')) return false"/>
+            </p:column>
+            		
+
+
+		</p:dataTable>
+
+	</h:form>
+
+</h:body>
+</html>

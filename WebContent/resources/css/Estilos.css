@@ -1,0 +1,23 @@
+/* Barra de Menu sempre visível */
+.ui-layout-north {
+	z-index: 10 !important;
+	overflow: visible !important;
+}
+
+.ui-layout-north .ui-layout-unit-content {
+	overflow: visible !important;
+}
+
+/* Caixa de Diálogo */
+.ui-dialog {
+	z-index: 11 !important;
+}
+
+.ui-dialog-titlebar-close {
+	width: 22px;
+	height: 22px;
+}
+
+.ui-dialog-titlebar-close span {
+	margin: -10px -10px -10px -10px !important;
+}

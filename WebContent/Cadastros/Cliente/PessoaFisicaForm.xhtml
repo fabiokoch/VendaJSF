@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title></title>
+	<link rel="stylesheet" type="text/css"
+		href="/VendaJSF/resources/css/Estilos.css" />
+	<script type="text/javascript"
+		src="/VendaJSF/resources/jquery-ui-1.11.4/jquery-ui.js"></script>
+	<script type="text/javascript"
+		src="/VendaJSF/resources/jquery-dialogextend-
+master/build/jquery.dialogextend.js"></script>
+	<script type="text/javascript" src="/VendaJSF/resources/js/Funcoes.js"></script>
+</h:head>
+<h:body>
+
+	<h:form id="formEditar">
+		<p:focus for="nome" />
+		<p:growl></p:growl>
+		<p:panelGrid columns="2">
+			<f:facet name="header">
+				<p:outputLabel value="Cadastro de Pessoa Fisica" />
+			</f:facet>
+
+			<p:outputLabel value="Código:" for="id" />
+			<p:inputText id="id" readonly="true" size="5"
+				value="#{fisica.objeto.id}" />
+
+			<p:outputLabel value="Nome:" for="nome" />
+			<p:inputText id="nome" size="50" value="#{fisica.objeto.nome}" />
+
+			<p:outputLabel value="Endereço:" for="endereco" />
+			<p:inputText id="endereco" size="50"
+				value="#{fisica.objeto.endereco}" />
+
+			<p:outputLabel value="Número:" for="numero" />
+			<p:inputText id="numero" size="50" value="#{fisica.objeto.numero}" />
+
+			<p:outputLabel value="Complemento:" for="complemento" />
+			<p:inputText id="complemento" size="50"
+				value="#{fisica.objeto.complemento}" />
+
+			<p:outputLabel value="Bairro:" for="bairro" />
+			<p:inputText id="bairro" size="50" value="#{fisica.objeto.bairro}" />
+
+			<p:outputLabel value="CEP:" for="cep" />
+			<p:inputMask id="cep" size="50" value="#{fisica.objeto.cep}"
+				mask="99999-999" />
+
+			<p:outputLabel value="E-mail:" for="email" />
+			<p:inputText id="email" size="50" value="#{fisica.objeto.email}" />
+
+			<p:outputLabel value="Telefone:" for="telefone" />
+			<p:inputMask id="telefone" size="50"
+				value="#{fisica.objeto.telefone}" mask="(99) 9999-9999" />
+
+			<p:outputLabel value="RG:" for="rg"></p:outputLabel>
+			<p:inputText id="rg" size="50" value="#{fisica.objeto.rg}"></p:inputText>
+
+			<p:outputLabel value="CPF:" for="cpf"></p:outputLabel>
+			<p:inputText id="cpf" size="50" value="#{fisica.objeto.cpf}"></p:inputText>
+
+
+			<p:outputLabel value="Data Nascimento:" for="dataNascimento" />
+			<p:calendar id="dataNascimento"
+				value="#{fisica.objeto.dataNascimento}" showOn="button"></p:calendar>
+
+			<p:commandLink value="Cidade" onclick="parent.abrePopUp('../../Cadastros/Cidade/CidadeList.xhtml', 'Cadastro de Cidades', 500, 800, true)" />
+		<p:autoComplete id="cidade" style="width:600px"
+                dropdown="true" multiple="false" forceSelection="true"
+                var="obj" itemLabel="#{obj.nome} / #{obj.uf}" itemValue="#{obj}"  	     
+                value="#{fisica.objeto.cidade}" 
+                converter="cidadeConverter"
+                completeMethod="#{fisica.completeCidade}" />
+
+
+			<f:facet name="footer">
+				<p:commandButton value="Gravar" action="#{fisica.gravar}"
+					ajax="false" />
+				<p:commandButton value="Cancelar"
+					action="#{fisica.cancelar}" ajax="false" immediate="true" />
+			</f:facet>
+		</p:panelGrid>
+	</h:form>
+</h:body>
+</html>

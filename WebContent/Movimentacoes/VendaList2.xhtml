@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title></title>
+</h:head>
+<h:body onload="#{vendaCrud.inicializarLista()}">
+
+	<h:form id="formLista">
+        <p:growl></p:growl>
+		<p:dataTable var="cid" value="#{vendaCrud.lista}"
+		    paginator="true" rows="10" rowsPerPageTemplate="5,10,15"
+            paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+            currentPageReportTemplate="Listando de {startRecord} até {endRecord} de {totalRecords}."
+            emptyMessage="Nenhum resultado encontrado"
+		   >
+			<f:facet name="header">
+				<p:spacer height="20"></p:spacer>
+				<div align="left" style="position:absolute; top:20px; width:95%;">
+				   <p:outputLabel value="Listagem de vendas"></p:outputLabel>
+				</div>
+				<div align="right" style="position:absolute; top:12px; width:95%;">
+					<p:commandButton id="botaoIncluir" value="Incluir" action="#{vendaCrud.incluir}" ajax="false"/>
+				</div>
+    		</f:facet>
+			<p:column headerText="Código" 
+				      sortBy="#{cid.id}"
+				      filterBy="#{cid.id}" filterMatchMode="exact">
+				<h:outputText value="#{cid.id}" />
+			</p:column>
+
+			<p:column headerText="Data"
+			          sortBy="#{cid.data}"
+			          filterBy="#{cid.data}" filterMatchMode="exact">
+                <h:outputText value="#{cid.data}">
+                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                </h:outputText> 
+			</p:column>
+
+			<p:column headerText="Recibo"
+			          sortBy="#{cid.recibo}"
+			          filterBy="#{cid.recibo}" filterMatchMode="contains">
+				<h:outputText value="#{cid.recibo}" />
+			</p:column>
+
+			<p:column headerText="Total" style="text-align: right;"
+			          sortBy="#{cid.valortotal}"
+			          filterBy="#{cid.valortotal}" filterMatchMode="contains">
+				<h:outputText value="#{cid.valortotal}">
+				   <f:convertNumber pattern="#,##0.00" />
+				</h:outputText>
+			</p:column>
+
+			<p:column headerText="Cliente" 
+			          sortBy="#{cid.cliente.nome}"
+			          filterBy="#{cid.cliente.nome}" filterMatchMode="contains">
+				<h:outputText value="#{cid.cliente.nome}" />
+			</p:column>
+
+            <p:column headerText="" width="60">
+                 <p:commandButton action="#{vendaCrud.alterar(cid.id)}" value="Alterar" ajax="false"/>
+            </p:column>
+            
+            <p:column headerText="" width="60">
+                 <p:commandButton action="#{vendaCrud.excluir(cid.id)}" value="Excluir" ajax="false"
+                                onclick="if (!confirm('Confirma a exclusão?')) return false"/>
+            </p:column>
+            		
+
+
+		</p:dataTable>
+
+	</h:form>
+
+</h:body>
+</html>

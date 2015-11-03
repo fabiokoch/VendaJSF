@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title></title>
+</h:head>
+<h:body onload="#{valor.inicializarLista()}">
+
+	<h:form id="formLista">
+        <p:growl></p:growl>
+		<p:dataTable var="cid" value="#{valor.lista}"
+		    paginator="true" rows="10" rowsPerPageTemplate="5,10,15"
+            paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+            currentPageReportTemplate="Listando de {startRecord} até {endRecord} de {totalRecords}."
+            emptyMessage="Nenhum resultado encontrado"
+		   >
+			<f:facet name="header">
+				<p:spacer height="20"></p:spacer>
+				<div align="left" style="position:absolute; top:20px; width:95%;">
+				   <p:outputLabel value="Listagem de Valores de Passes"></p:outputLabel>
+				</div>
+				<div align="right" style="position:absolute; top:12px; width:95%;">
+					<p:commandButton id="botaoIncluir" value="Incluir" action="#{valor.incluir}" ajax="false"/>
+				</div>
+    		</f:facet>
+			<p:column headerText="Código" 
+				      sortBy="#{cid.id_valor}"
+				      filterBy="#{cid.id_valor}" filterMatchMode="exact">
+				<h:outputText value="#{cid.id_valor}" />
+			</p:column>
+
+			<p:column headerText="Data inicio da vigencia"
+			          sortBy="#{cid.data_inicio_vigencia}"
+			          filterBy="#{cid.data_inicio_vigencia}" filterMatchMode="contains">
+				<h:outputText value="#{cid.data_inicio_vigencia}" />
+			</p:column>
+
+			<p:column headerText="Data fim da vigencia" 
+			          sortBy="#{cid.data_fim_vigencia}"
+			          filterBy="#{cid.data_fim_vigencia}" filterMatchMode="startsWith">
+				<h:outputText value="#{cid.data_fim_vigencia}" />
+			</p:column>
+			
+			<p:column headerText="Valor" 
+			          sortBy="#{cid.valor}"
+			          filterBy="#{cid.valor}" filterMatchMode="startsWith">
+				<h:outputText value="#{cid.valor}" />
+			</p:column>
+			
+			<p:column headerText="Tipo" 
+			          sortBy="#{cid.tipo}"
+			          filterBy="#{cid.tipo}" filterMatchMode="startsWith">
+				<h:outputText value="#{cid.tipo.descricao}" />
+			</p:column>
+
+            <p:column headerText="" width="60">
+                 <p:commandButton action="#{valor.alterar(cid.id_valor)}" value="Alterar" ajax="false"/>
+            </p:column>
+            
+            <p:column headerText="" width="60">
+                 <p:commandButton action="#{valor.excluir(cid.id_valor)}" value="Excluir" ajax="false"
+                                onclick="if (!confirm('Confirma a exclusão?')) return false"/>
+            </p:column>
+            		
+
+
+		</p:dataTable>
+
+	</h:form>
+
+</h:body>
+</html>
